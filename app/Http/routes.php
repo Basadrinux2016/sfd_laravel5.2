@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/prueba',['uses'=>'PruebaController@index']);
+Route::get('/flash',['uses'=>'PruebaController@flash']);
+
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('users','UsersController');
+	Route::get('users/{id}/destroy',[
+		'uses' => 'UsersController@destroy',
+		'as'   => 'users.destroy'
+	]);
+});
